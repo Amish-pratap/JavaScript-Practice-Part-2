@@ -1,4 +1,4 @@
-const createAutoComplete = ({root}) => {
+const createAutoComplete = ({ root, renderOption, onOptionSelect, inputValue, fetchData }) => {
     root.innerHTML = `
     <label><b>Search For a Movie</b></label>
     <input class="input"/>
@@ -15,25 +15,21 @@ const createAutoComplete = ({root}) => {
 
 
     const onInput = async event => {
-        const movies = await fetchData(event.target.value);
-        if (!movies.length) {
+        const items = await fetchData(event.target.value);
+        if (!items.length) {
             dropdown.classList.remove('is-active');
             return;
         }
         resutlsWrapper.innerHTML = "";
         dropdown.classList.add('is-active');
-        for (let movie of movies) {
+        for (let item of items) {
             const option = document.createElement('a');
-            const imgSrc = movie.Poster === 'N/A' ? '' : movie.Poster;
             option.classList.add('dropdown-item');
-            option.innerHTML = `
-        <img src="${imgSrc}" />
-        ${movie.Title}
-        `;
+            option.innerHTML = renderOption(item);
             option.addEventListener('click', () => {
                 dropdown.classList.remove('is-active');
-                input.value = movie.Title;
-                onMovieSelect(movie);
+                input.value = inputValue(item);
+                onOptionSelect(item);
             })
             resutlsWrapper.appendChild(option);
         }
