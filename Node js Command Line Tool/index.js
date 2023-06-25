@@ -3,7 +3,14 @@
 const fs = require('fs');
 //file system module in node
 
-fs.readdir(process.cwd(),(err,filenames)=>{
+//methon #2
+const util = require('util');
+// const lstat = util.promisify(fs.lstat);
+
+//methos #3
+//fs promises Api
+const {lstat} =fs.promises;
+fs.readdir(process.cwd(),async (err,filenames)=>{
     //either
     //err===an error , which means something went ron 
     //or
@@ -11,25 +18,25 @@ fs.readdir(process.cwd(),(err,filenames)=>{
     if(err){
         console.log(err);
     }
-    const allStats= Array(filenames.length).fill(null);
-    
-
     for(let filename of filenames){
-        const index=filenames.indexOf(filename);
-        fs.lstat(filename,(err,stats)=>{
-            if(err){
-                console.log(err);
-            }
-            allStats[index]=stats;
-            const ready =allStats.every((stats)=>{
-                return stats;
-            })
-            if(ready){
-                allStats.forEach((stats,index)=>{
-                    console.log(filenames[index],stats.isFile());
-                })
-            }
-        })
+        try{
+        const stats = await lstat(filename);
+        console.log(filename,stats.isFile());
+        }catch(err){
+            console.log(err);
+        }
     }
+    
 });
-
+ 
+//method #1
+// const lstat = (filename)=>{
+//     return new Promise((resolve,reject)=>{
+//         fs.lstat(filename,(err,stats)=>{
+//             if(err){
+//                 reject (err);
+//             }
+//             resolve(stats);
+//         })
+//     })
+// }
