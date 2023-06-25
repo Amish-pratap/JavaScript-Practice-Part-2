@@ -2,7 +2,7 @@
 
 const fs = require('fs');
 //file system module in node
-
+// const chalk = require('chalk');
 //methon #2
 const util = require('util');
 // const lstat = util.promisify(fs.lstat);
@@ -18,15 +18,14 @@ fs.readdir(process.cwd(),async (err,filenames)=>{
     if(err){
         console.log(err);
     }
-    for(let filename of filenames){
-        try{
-        const stats = await lstat(filename);
-        console.log(filename,stats.isFile());
-        }catch(err){
-            console.log(err);
-        }
+    const statPromises = filenames.map(filename=>{
+        return lstat(filename);
+    })
+    const allStats=await Promise.all(statPromises);
+    for(let stats of allStats){
+        const index = allStats.indexOf(stats);
+        console.log(filenames[index],stats.isFile());
     }
-    
 });
  
 //method #1
