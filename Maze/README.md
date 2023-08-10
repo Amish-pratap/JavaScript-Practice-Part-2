@@ -20,7 +20,7 @@ A simple maze puzzle game built using Matter.js, a 2D physics engine for the web
 
 This project is a maze puzzle game built using HTML, JavaScript, and the Matter.js physics engine. The goal of the game is to navigate a ball through a randomly generated maze to reach the green goal while avoiding walls.
 
-![Game Screenshot](/screenshot.png)
+
 
 ## Features
 
