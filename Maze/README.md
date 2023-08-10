@@ -40,21 +40,21 @@ This project is a maze puzzle game built using HTML, JavaScript, and the Matter.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/maze-puzzle.git
+   git clone https://github.com/Amish-pratap/JavaScript-Practice-Part2/Maze
 
 
-   How to Play
+### How To Play
 Use the keyboard arrow keys to navigate the blue ball through the maze.
 The goal is to reach the green rectangle at the end of the maze.
-Controls
+### Controls
 W: Move the ball upward
 A: Move the ball to the left
 S: Move the ball downward
 D: Move the ball to the right
-Win Condition
+### Win Condition
 The game will declare you a winner when the ball successfully reaches the green goal. The maze walls will turn into physical objects after winning.
 
-Contributing
+### Contributing
 Contributions are welcome! If you find any bugs, want to improve the game, or have ideas for new features, feel free to submit a pull request.
 
 Fork the project.
@@ -62,5 +62,5 @@ Create your feature branch (git checkout -b feature/your-feature).
 Commit your changes (git commit -m 'Add some feature').
 Push to the branch (git push origin feature/your-feature).
 Open a pull request.
-License
+### License
 This project is licensed under the MIT License.
